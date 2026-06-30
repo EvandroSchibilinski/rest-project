@@ -1,11 +1,17 @@
 package com.schibilinski.projeto.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Tarefas")
 public class Tarefa {
 
     @Id
@@ -13,8 +19,48 @@ public class Tarefa {
     private Long id;
 
     private String titulo;
+
     private String descricao;
-    private boolean concluida;
+
+    @Enumerated(EnumType.STRING)
+    private StatusTarefa status; // PENDENTE, EM_ANDAMENTO, CONCLUIDA
+
+    private LocalDate dataLimite;
+
+    private LocalDate criadaEm;
+
+    public enum StatusTarefa {
+            PENDENTE,
+            EM_ANDAMENTO,
+            CONCLUIDA
+        }
+
+    //GETTERS AND SETTERS
+
+
+    public StatusTarefa getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusTarefa status) {
+        this.status = status;
+    }
+
+    public LocalDate getDataLimite() {
+        return dataLimite;
+    }
+
+    public void setDataLimite(LocalDate dataLimite) {
+        this.dataLimite = dataLimite;
+    }
+
+    public LocalDate getCriadaEm() {
+        return criadaEm;
+    }
+
+    public void setCriadaEm(LocalDate criadaEm) {
+        this.criadaEm = criadaEm;
+    }
 
     public Long getId() {
         return id;
@@ -40,11 +86,4 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public boolean isConcluida() {
-        return concluida;
-    }
-
-    public void setConcluida(boolean concluida) {
-        this.concluida = concluida;
-    }
 }
